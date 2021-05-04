@@ -12,11 +12,28 @@ function Main() {
     return (
       <div>
         <Logout></Logout>
-        <h1>Componente principal</h1>
+        <Profile />
         <Panel></Panel>
       </div>
     );
   }
 }
+
+const Profile = () => {
+  const { user, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <h2>Cargando</h2>;
+  } else {
+    console.log(user);
+    return (
+      <div>
+        <img style={{margin:"10px",borderRadius:"10px"}} src={user.picture} alt="profile pic"/>
+        <h3>{user.given_name}</h3>
+        <h3>{user.email}</h3>
+      </div>
+    );
+  }
+};
 
 export default Main;
